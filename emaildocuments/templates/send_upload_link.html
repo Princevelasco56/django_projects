@@ -1,0 +1,16 @@
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <label>Email:</label>
+    <input type="email" name="email" required>
+    <label>Missing Requirement:</label>
+    <input type="text" name="note" required>
+    <button type="submit">Send Link</button>
+  </form>
+  
