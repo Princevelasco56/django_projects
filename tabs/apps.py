@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class EmaildocumentsConfig(AppConfig):
+class TabsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'emaildocuments'
+    name = 'tabs'

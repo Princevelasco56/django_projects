@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
-import environ
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,32 +20,32 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # The code snippet you provided is configuring email settings and admin user details in a Django
 # project settings file. Let's break it down:
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config("EMAIL_HOST", cast=str, default=None)
-EMAIL_PORT = config("EMAIL_PORT", cast=str, default='587') # Recommended
-EMAIL_HOST_USER = config("EMAIL_HOST_USER", cast=str, default=None)
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", cast=str, default=None)
-EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=True)  # Use EMAIL_PORT 587 for TLS
-EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool, default=False)  # EUse MAIL_PORT 465 for SSL
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = config("EMAIL_HOST", cast=str, default=None)
+# EMAIL_PORT = config("EMAIL_PORT", cast=str, default='587') # Recommended
+# EMAIL_HOST_USER = config("EMAIL_HOST_USER", cast=str, default=None)
+# EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", cast=str, default=None)
+# EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool, default=True)  # Use EMAIL_PORT 587 for TLS
+# EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool, default=False)  # EUse MAIL_PORT 465 for SSL
 
-ADMIN_USER_NAME=config("ADMIN_USER_NAME", default="Admin user")
-ADMIN_USER_EMAIL=config("ADMIN_USER_EMAIL", default=None)
+# ADMIN_USER_NAME=config("ADMIN_USER_NAME", default="Admin user")
+# ADMIN_USER_EMAIL=config("ADMIN_USER_EMAIL", default=None)
 
-MANAGERS=[]
-ADMINS=[]
-if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
-    ADMINS +=[
-        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
-    ]
-    MANAGERS=ADMINS
+# MANAGERS=[]
+# ADMINS=[]
+# if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+#     ADMINS +=[
+#         (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}')
+#     ]
+#     MANAGERS=ADMINS
     
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Initialize environment variables
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+# env = environ.Env(
+#     DEBUG=(bool, False)
+# )
 #Read the .env file
-environ.Env.read_env(BASE_DIR / '.env')  
+# environ.Env.read_env(BASE_DIR / '.env')  
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -57,10 +54,9 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-x&c*y_$a!ayh(81uic+g^7=-663_&aiw6@*)+)l_eyoxga6$v4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+# DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
 
 
 # Application definition
@@ -72,7 +68,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'emaildocuments',  # Your app name here
+    # 'emaildocuments',  # Your app name here
+    'tabs',
 ]
 
 MIDDLEWARE = [
@@ -103,22 +100,26 @@ TEMPLATES = [
     },
 ]
 
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'templates')]
 WSGI_APPLICATION = 'FEMS.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': env('DB_NAME'),
+#         'USER': env('DB_USER'),
+#         'PASSWORD': env('DB_PASSWORD'),
+#         'HOST': env('DB_HOST'),
+#         'PORT': env('DB_PORT'),
+#     }
+# }
 
 
 # Password validation

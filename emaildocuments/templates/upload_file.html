@@ -1,7 +1,0 @@
-<h2>Hello {{ applicant.name|default:applicant.email }}</h2>
-<p>Please upload your missing document:</p>
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" name="document" required>
-  <button type="submit">Upload</button>
-</form>
